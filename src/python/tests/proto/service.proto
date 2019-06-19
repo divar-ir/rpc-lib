@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message TestServiceRequest {
+}
+
+
+message TestServiceResponse {
+}
+
+service TestService {
+    rpc DoIt(TestServiceRequest) returns (TestServiceResponse) {
+    }
+}

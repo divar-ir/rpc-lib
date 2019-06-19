@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package rpc_lib;
+
+message GRPCServiceInstanceConfig {
+  string endpoint = 1;
+}
+
+message GRPCServiceConfig {
+  GRPCServiceInstanceConfig default_instance = 1;
+  map<string /*instance_name*/, GRPCServiceInstanceConfig> other_instances = 2;    
+}
+
+message RabbitMQServiceInstanceConfig {
+  string endpoint = 1;
+  string exchange_name = 2;
+  bool support_new_rabbitmq_protocol = 3;
+}
+
+message RabbitMQServiceConfig {
+  RabbitMQServiceInstanceConfig default_instance = 1;
+  map<string /*instance_name*/, RabbitMQServiceInstanceConfig> other_instances = 2;    
+}
+
+message Config {    // deprecated
+  map<string /*service_name*/, GRPCServiceConfig> grpc_services = 1;
+  map<string /*service_name*/, RabbitMQServiceConfig> rabbitmq_services = 2;
+}
+
+message ServiceDefinition {
+  string name = 1 [deprecated=true];
+  string proto_path = 2;
+  string service_name = 3;
+  GRPCServiceConfig preloaded_grpc_config = 4 [deprecated=true];
+  RabbitMQServiceConfig preloaded_rabbitmq_config = 5 [deprecated=true];
+}
+
+extend google.protobuf.EnumValueOptions {
+    ServiceDefinition service_definition = 1000;
+}

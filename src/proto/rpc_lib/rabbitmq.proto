@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package rpc_lib;
+
+import "rpc_lib/call_info.proto";
+
+message RabbitMqRpcMessage {
+    bytes request = 1;
+    bytes experiments_data = 2;  // hooks, experiments
+    RpcInfo rpc_info = 3;
+    TraceInfo trace_info = 4;
+}
+

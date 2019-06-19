@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "rpc_lib/config/flags.proto";
+import "rpc_lib/config/conditions.proto";
+import "rpc_lib/config/experiments.proto";
+import "rpc_lib/service_config.proto";
+
+package rpc_lib.config;
+
+message GlobalConfig {
+    repeated FlagDefinition flags = 1;
+    repeated ConditionDefinition conditions = 2;
+    reserved 3;
+    repeated ExperimentAutoSelect experiment_selections = 4;
+    map<int32, ExperimentDefinition> experiments = 5;
+    map<int32, ExperimentLayer> layers = 6;
+    ServicesConfig services_config = 7;
+}
+
+
+message ServicerConfig {
+  rpc_lib.GRPCServiceInstanceConfig grpc = 1;
+  rpc_lib.RabbitMQServiceInstanceConfig rabbitmq = 2;
+  repeated string services = 3;
+};
+
+message ServicesConfig {
+  map<string /*servicer_name*/, ServicerConfig> servicers = 1;
+}
+

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "rpc_lib/config/flags.proto";
+
+package rpc_lib.config;
+
+message ExperimentLayer {
+    enum Type {
+        UNKNOWN = 0;
+        TRAFFIC = 1;
+    }
+    int32 id = 1;
+    Type type = 2;
+    int32 bucket_count = 3;
+}
+
+message ExperimentAutoSelect {
+    int32 experiment_id = 1;
+    int32 layer_id = 2;
+    int32 hash_start = 3;
+    int32 hash_end = 4;
+}
+
+message ExperimentDefinition {
+    int32 id = 1;
+    map<string, FlagValue> flag_values = 2;
+}

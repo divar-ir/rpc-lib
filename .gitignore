@@ -1,0 +1,19 @@
+*.pyc
+*.sw?
+.python-version
+.idea/
+*_pb2.py
+*_pb2_grpc.py
+.env
+*.egg-info
+
+# GO
+*.pb.go
+*.autogen.go
+bin
+*.lock
+mocks
+
+# Visual Studio Code
+.vscode
+debug.test

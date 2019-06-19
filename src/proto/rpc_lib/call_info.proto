@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rpc_lib;
+
+import "google/protobuf/timestamp.proto";
+
+message ClientInfo {
+    string ip = 1;
+    string phone = 2;
+}
+
+message RpcInfo {
+    google.protobuf.Timestamp ts = 1;
+    google.protobuf.Timestamp target_ts = 4;
+    string method = 2;
+    string caller_service = 3;
+}
+
+message TraceInfo {
+    ClientInfo client = 1;
+}
